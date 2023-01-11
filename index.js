@@ -1,21 +1,25 @@
-const fastify = require('fastify')({ logger: {level: "error"}, trustProxy: true })
-
+const dotenv = require("dotenv");
+dotenv.config();
+console.log(process.env);
+const fastify = require("fastify")({
+  logger: { level: "error" },
+  trustProxy: true,
+});
 const PORT = process.env.PORT || 3000;
 
-fastify.register(require('fastify-cors'))
+fastify.register(require("fastify-cors"));
 
-fastify.get('/', function (req, reply) {
-  console.log(process.env.TEST)
-  return { hello: "main-updatess" }
-})
+fastify.get("/", function (req, reply) {
+  console.log(process.env.TEST);
+  return { hello: "main-updatess" };
+});
 
 const start = async () => {
   try {
-    await fastify.listen(PORT, '0.0.0.0')
+    await fastify.listen(PORT, "0.0.0.0");
   } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
+    fastify.log.error(err);
+    process.exit(1);
   }
-}
-start()
-
+};
+start();
